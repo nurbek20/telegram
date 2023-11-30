@@ -130,8 +130,12 @@
                 document.getElementById("error").innerText = "Ошибка в Номер Телефоне"
                 return
             }
-            
-            tg.sendData();
+             let data={
+                name:name,
+                email:email,
+                phone:phone
+             }
+            tg.sendData(JSON.stringify(data));
             tg.close();
         }
 
