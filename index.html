@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width= , initial-scale=1.0">
     <title>Fast Food</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-        body{
-            font-family: 'Montserrat' , sans-serif;
+
+        body {
+            font-family: 'Montserrat', sans-serif;
             font-weight: 200;
             color: var(--tg-theme-text-color);
             background: var(--tg-theme-bg-color);
         }
-        #main{
+
+        #main {
             width: 100%;
             padding: 10px;
             text-align: center;
 
         }
-        h1{
+
+        h1 {
             margin-top: 50px;
             margin-bottom: 10px;
         }
-        img{
+
+        img {
             width: 70px;
             margin: 30px auto;
         }
-        p{
+
+        p {
             width: 350px;
             margin: 0 auto;
         }
-        button{
+
+        button {
             border: 0;
             border-radius: 5px;
             margin-top: 50px;
@@ -47,14 +54,17 @@
             color: var(--tg-theme-button-color);
             background: var(--tg-theme-button-text-color);
         }
-        button:hover{
+
+        button:hover {
             background: var(--tg-theme-secondary-bg-color);
         }
-        #form{
+
+        #form {
             display: none;
-            text-align: center ;
+            text-align: center;
         }
-        input{
+
+        input {
             width: 90%;
             outline: none;
             margin: 10px 5%;
@@ -63,16 +73,19 @@
             border: 2px solid silver;
             border-radius: 5px;
         }
-        input:focus{
-            border-color:#db5d5d ;
+
+        input:focus {
+            border-color: #db5d5d;
         }
     </style>
 </head>
+
 <body>
 
     <div id="main">
         <h1>Fast Food</h1>
-        <img src="https://static.vecteezy.com/system/resources/previews/025/064/792/non_2x/fast-food-meal-with-ai-generated-free-png.png" alt="">
+        <img src="https://static.vecteezy.com/system/resources/previews/025/064/792/non_2x/fast-food-meal-with-ai-generated-free-png.png"
+            alt="">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         <button id="buy">Купить</button>
     </div>
@@ -81,26 +94,48 @@
         <input type="text" name="" placeholder="Имя" id="user_name">
         <input type="text" name="" placeholder="Email" id="user_email">
         <input type="text" name="" placeholder="Телефон" id="user_phone">
+        <div id="error"></div>
         <button id="order">Оформить</button>
     </form>
-    
+
 
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <script>
-        let tg=window.Telegram.WebApp
-        let buy=document.getElementById("buy")
-        let order=document.getElementById("order")
-        buy.onclick=()=>{
-            document.getElementById("main").style.display="none"
-            document.getElementById("form").style.display="block"
-            document.getElementById("user_name").value=`${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`
+        let tg = window.Telegram.WebApp
+        let buy = document.getElementById("buy")
+        let order = document.getElementById("order")
+
+
+        tg.expand()
+
+        buy.onclick = () => {
+            document.getElementById("main").style.display = "none"
+            document.getElementById("form").style.display = "block"
+            document.getElementById("user_name").value = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`
         }
-        order.onclick=()=>{
-             tg.close()
-        }    
-        
-        </script>
+        order.onclick = () => {
+            document.getElementById("error").innerText = ""
+            let = document.getElementById("user_name").value
+            let email = document.getElementById("user_email").value
+            let phone = document.getElementById("user_phone").value
+            if (name.length < 5) {
+                document.getElementById("error").innerText = "Ошибка имени"
+                return
+            } else if (email.length < 5) {
+                document.getElementById("error").innerText = "Ошибка email"
+                return
+            } else if (phone.length < 5) {
+                document.getElementById("error").innerText = "Ошибка в Номер Телефоне"
+                return
+            }
+            
+            tg.sendData();
+            tg.close();
+        }
+
+    </script>
 </body>
+
 </html>
